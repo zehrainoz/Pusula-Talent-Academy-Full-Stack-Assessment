@@ -1,7 +1,6 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
-
-
 
     public static void MaxIncreasingSubArrayAsJson(List<int> numbers)
     {
@@ -33,14 +32,19 @@ using System.Collections.Generic;
                 currentSublist = new List<int> { numbers[i] };
             }
         }
-    
+
 
         increasingSubArrays.Add(new List<int>(currentSublist));
 
-        foreach (var sub in increasingSubArrays)
+        var maxSubarray = increasingSubArrays.OrderByDescending(sub => sub.Sum()).First();
+
+        
+        // Test
+        foreach (var max in maxSubarray)
         {
-            Console.WriteLine($"[{string.Join(", ", sub)}]");
+            Console.WriteLine(max);
         }
+        
 
     }
 
