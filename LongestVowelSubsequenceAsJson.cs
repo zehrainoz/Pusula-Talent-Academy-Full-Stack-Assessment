@@ -48,7 +48,7 @@ public static string LongestVowelSubsequenceAsJson(List<string> words)
         //Save the word that ends with vowel letters, or all letters are vowels
         vowelSubSequences.Add(sequence.ToString());    
 
-        //Reset sequence that ends with vowel letters, or all letters are vowels
+        //Reset sequence that ends with vowel letters, or all letters are vowels 
         sequence.Clear();        
 
         //Find the longest vowel subSeqeunce and save
@@ -59,5 +59,13 @@ public static string LongestVowelSubsequenceAsJson(List<string> words)
         vowelSubSequences.Clear();
     }
 
-    return JsonSerializer.Serialize(longestVowelSequences);
+    //Create last version of the output with words, sequences and lengths
+    var result = words.Select((word, i) => new 
+    {
+        Word = word,
+        Sequence = longestVowelSequences[i],
+        Length = longestVowelSequences[i].Length
+    });
+    
+    return JsonSerializer.Serialize(result);
 }
